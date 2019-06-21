@@ -56,11 +56,18 @@ Lenguajes de programación (CCOMP 7-1)
 
    Encargado: Oscar
    
-   Estado: Incompleto
+   Estado: Completo!!
    
-   Comentarios:
-   
-   
+   Comentarios: 
+       
+     Constantes: Implemente direcciones NORESTE, NOROESTE, SURESTE, SUROESTE.
+     Funciones: irANorEste(), irANorOeste(), ... .
+     Funciones: girarIzquierda(), girarDerecha() estan adaptadas a las nuevas direcciones.
+     Pantalla: Los robots, si mira a NORESTE, NOROESTE, se mostrara como mirar NORTE.
+     Pantalla: Los robots, si mira a SURESTE, SUROESTE, se mostrara como mirar SUR.
+    
+     
+     
 ### 7. Permitir partidas con n jugadores (2,3, o 4)
 
    Encargado: Juan
