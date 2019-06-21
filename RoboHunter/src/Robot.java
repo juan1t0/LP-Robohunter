@@ -14,7 +14,8 @@
 public abstract class Robot {
 
 	public static enum Direccion {
-		NORTE, SUR, ESTE, OESTE
+		NORTE, SUR, ESTE, OESTE, 
+		NORESTE, NOROESTE, SURESTE, SUROESTE 
 	}
 
 	protected int posF;
@@ -48,21 +49,21 @@ public abstract class Robot {
 		this.posC = posC;
 		this.direccion = direccion;
 	}
-
+	
 	public void irNorte() {
 		if (estamina > 0 && tablero.esValido(posF - 1)) {
 			posF--;
 		}
 		estamina--;
 	}
-
+	
 	public void irSur() {
 		if (estamina > 0 && tablero.esValido(posF + 1)) {
 			posF++;
 		}
 		estamina--;
 	}
-
+	
 	public void irEste() {
 		if (estamina > 0 && tablero.esValido(posC + 1)) {
 			posC++;
@@ -76,20 +77,68 @@ public abstract class Robot {
 		}
 		estamina--;
 	}
+	
+	public void irNorEste() { // Gasta 1 de estamina, no 2.
+		if(estamina > 0 && tablero.esValido(posF - 1)
+				&& tablero.esValido(posC + 1)) {
+			posF--;
+			posC++;
+		}
+		estamina--;
+	}
+	
+	public void irNorOeste() {
+		if(estamina > 0 && tablero.esValido(posF - 1)
+				&& tablero.esValido(posC - 1)) {
+			posF--;
+			posC--;
+		}
+		estamina--;
+	}
+
+	public void irSurEste() {
+		if(estamina > 0 && tablero.esValido(posF + 1)
+				&& tablero.esValido(posC + 1)) {
+			posF++;
+			posC++;
+		}
+		estamina--;
+	}
+
+	public void irSurOeste() {
+		if(estamina > 0 && tablero.esValido(posF + 1)
+				&& tablero.esValido(posC - 1)) {
+			posF--;
+			posC--;
+		}
+		estamina--;
+	}
 
 	public void girarIzquierda() {
 		switch (direccion) {
 		case NORTE:
-			direccion = Direccion.OESTE;
+			direccion = Direccion.NOROESTE;
 			break;
 		case SUR:
-			direccion = Direccion.ESTE;
+			direccion = Direccion.SURESTE;
 			break;
 		case ESTE:
-			direccion = Direccion.NORTE;
+			direccion = Direccion.NORESTE;
 			break;
 		case OESTE:
-			direccion = Direccion.SUR;
+			direccion = Direccion.SUROESTE;
+			break;
+		case NORESTE:
+			direccion = Direccion.NORTE;
+			break;
+		case NOROESTE:
+			direccion = Direccion.OESTE;
+			break;
+		case SURESTE:
+		        direccion = Direccion.ESTE;
+			break;
+		case SUROESTE:
+			direccion = Direccion.SUR;	
 			break;
 		}
 		estamina--;
@@ -98,16 +147,28 @@ public abstract class Robot {
 	public void girarDerecha() {
 		switch (direccion) {
 		case NORTE:
-			direccion = Direccion.ESTE;
+			direccion = Direccion.NORESTE;
 			break;
 		case SUR:
-			direccion = Direccion.OESTE;
+			direccion = Direccion.SUROESTE;
 			break;
 		case ESTE:
-			direccion = Direccion.SUR;
+			direccion = Direccion.SURESTE;
 			break;
 		case OESTE:
+			direccion = Direccion.NOROESTE;
+			break;
+		case NORESTE:
+			direccion = Direccion.ESTE;
+			break;
+		case NOROESTE:
 			direccion = Direccion.NORTE;
+			break;
+		case SURESTE:
+		        direccion = Direccion.SUR;
+			break;
+		case SUROESTE:
+			direccion = Direccion.SUR;	
 			break;
 		}
 		estamina--;
@@ -127,6 +188,14 @@ public abstract class Robot {
 			return objetivoEnMira(posF, posC, 0, 1);
 		case OESTE:
 			return objetivoEnMira(posF, posC, 0, -1);
+		case NORESTE:
+			return objetivoEnMira(posF, posC, -1, 1);
+		case NOROESTE:
+			return objetivoEnMira(posF, posC, -1, -1);
+		case SURESTE:
+			return objetivoEnMira(posF, posC, 1, 1);
+		case SUROESTE:
+			return objetivoEnMira(posF, posC, 1, -1);
 
 		default:
 			break;
@@ -208,9 +277,9 @@ public abstract class Robot {
 
 	/**
 	 * Cambia la posición fila.
-	 * 
-	 * @param posF
+	 * @param posF, No usar en juego, sera considerado trampa, en cambio use los metodos irADireccion(). 
 	 */
+
 	public void setPosF(int posF) {
 		this.posF = posF;
 	}
@@ -224,8 +293,7 @@ public abstract class Robot {
 
 	/**
 	 * Cambia la posicion columna
-	 * 
-	 * @param posC
+	 * @param posC, No usar en juego, sera considerado trampa, en cambio use los metodos irA...(). 
 	 */
 	public void setPosC(int posC) {
 		this.posC = posC;
@@ -240,8 +308,7 @@ public abstract class Robot {
 
 	/**
 	 * Cambia la direccion.
-	 * 
-	 * @param direccion
+	 * @param direccion, No usar en juego, sera considerado trampa, en cambio use los metodos girar...(). 
 	 */
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
@@ -265,7 +332,7 @@ public abstract class Robot {
 			respuesta[1] = "" + face[1][0] + face[1][1];
 			break;
 		case NORTE:
-			respuesta[0] = "" + face[1][0] + face[1][1];
+			respuesta[0] = "" + face[1][1] + face[1][0];
 			respuesta[1] = "" + face[0][0] + face[0][1];
 			break;
 		case ESTE:
@@ -275,6 +342,23 @@ public abstract class Robot {
 		case OESTE:
 			respuesta[0] = "" + face[1][0] + face[0][0];
 			respuesta[1] = "" + face[1][1] + face[0][1];
+			break;
+
+		case NORESTE: // Mismo que Norte
+			respuesta[0] = "" + face[1][1] + face[1][0];
+			respuesta[1] = "" + face[0][0] + face[0][1];
+			break;
+		case NOROESTE: // Mismo que Norte
+			respuesta[0] = "" + face[1][1] + face[1][0];
+			respuesta[1] = "" + face[0][0] + face[0][1];
+			break;
+		case SURESTE: // Mismo que Sur
+			respuesta[0] = "" + face[0][0] + face[0][1];
+			respuesta[1] = "" + face[1][0] + face[1][1];
+			break;
+		case SUROESTE: // Mismo que Sur
+			respuesta[0] = "" + face[0][0] + face[0][1];
+			respuesta[1] = "" + face[1][0] + face[1][1];
 			break;
 		}
 		return respuesta;

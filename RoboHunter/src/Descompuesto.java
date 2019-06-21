@@ -29,7 +29,7 @@ public class Descompuesto extends Robot {
 	 */
 	@Override
 	public Character[][] getFace() {
-		Character[][] face = new Character[2][2];
+		Character[][] face = new Character[2][2]; //Cuando mira al SUR
 		face[0] = new Character[] { '@', '@' };
 		face[1] = new Character[] { ' ', 'v' };
 
