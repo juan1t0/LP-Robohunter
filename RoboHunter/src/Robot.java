@@ -108,7 +108,7 @@ public abstract class Robot {
 	public void irSurOeste() {
 		if(estamina > 0 && tablero.esValido(posF + 1)
 				&& tablero.esValido(posC - 1)) {
-			posF--;
+			posF++;
 			posC--;
 		}
 		estamina--;
@@ -168,7 +168,7 @@ public abstract class Robot {
 		        direccion = Direccion.SUR;
 			break;
 		case SUROESTE:
-			direccion = Direccion.SUR;	
+			direccion = Direccion.OESTE;	
 			break;
 		}
 		estamina--;
