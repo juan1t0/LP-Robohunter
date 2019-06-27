@@ -70,9 +70,9 @@ Lenguajes de programación (CCOMP 7-1)
      
 ### 7. Permitir partidas con n jugadores (2,3, o 4)
 
-   Encargado: Juan
+   Encargado: JuanPablo
    
-   Estado: Incompleto
+   Estado: En Proceso
    
    Comentarios:
    
