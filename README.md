@@ -72,9 +72,9 @@ Lenguajes de programación (CCOMP 7-1)
 
    Encargado: JuanPablo
    
-   Estado: En Proceso
+   Estado: Completo +/-
    
-   Comentarios:
+   Comentarios: Dos nuevas clases, Arena y BatallaCampal.
    
    
 ### 8. Implementar Función Torneo
